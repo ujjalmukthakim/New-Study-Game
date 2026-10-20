@@ -23,8 +23,9 @@ class User(AbstractUser):
 
 
     username=None
-    email=models.EmailField(max_length=254)
+    email=models.EmailField(max_length=254,unique=True)
     student_id=models.IntegerField(max_length=20,unique=True)
+    is_active=models.BooleanField(default=False)
 
     role=models.CharField(
         max_length=50,
