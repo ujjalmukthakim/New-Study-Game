@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from account.managers import CustomUserManager
+
 
 # Create your models here.
 
 class Batch_Section(models.Model):
     name=models.CharField(max_length=50)
+    is_active=models.BooleanField(default=False)
 
 
     def __str__(self):
@@ -21,7 +24,7 @@ class User(AbstractUser):
 
     username=None
     email=models.EmailField(max_length=254)
-    id=models.IntegerField(max_length=20)
+    student_id=models.IntegerField(max_length=20,unique=True)
 
     role=models.CharField(
         max_length=50,
@@ -30,7 +33,13 @@ class User(AbstractUser):
         
         )
     
-    batch_section=models.ForeignKey(Batch_Section, on_delete=models.PROTECT,related_name="user")
+    batch_section=models.ForeignKey(Batch_Section, on_delete=models.PROTECT,related_name="user",null=True,blank=True)
 
     USERNAME_FIELD='email'
-    REQUIRED_FIELDS=["id"]
+    REQUIRED_FIELDS=["student_id"]
+
+    objects=CustomUserManager()
+
+    def __str__(self):
+        return f'{self.id} - {self.role}'
+    

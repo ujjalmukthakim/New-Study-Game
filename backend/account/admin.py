@@ -5,7 +5,7 @@ from .models import User,Batch_Section
 @admin.register(Batch_Section)
 class BatchSectionAdmin(admin.ModelAdmin):
     list_display=("name")
-    list_filter=("name")
+    list_filter=("is_active")
     search_fields=("name")
 
 
