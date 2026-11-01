@@ -19,7 +19,15 @@ export function AuthProvider({children}) {
         return result;
     },[]);
 
+    const signOut =useCallback(()=>{
+        clearSession();
+        setUser(null);
+    },[]);   
+
+    const value=useMemo(()=>({user,isAuthenticate: Boolean(user),signIn,signOut}),
+    [user,signIn,signOut],
+
+);
     
-    
-    
+return  <AuthContext.Provider value={value}>{children}</AuthContext.Provider>  
 }
