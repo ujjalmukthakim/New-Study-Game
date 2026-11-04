@@ -61,6 +61,10 @@ export default function LoginForm({onSubmit}) {
                 
                 />
             </label>
+            <Button disabled={loading}>
+                {loading? "Signing in...":"Sign in"}
+
+            </Button>
 
         </form>
     )
